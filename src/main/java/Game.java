@@ -20,16 +20,16 @@ public class Game {
 
         drawingBoard(board);
 
-        boolean winner = isThereAWinner(board);
-        if (winner) {
-            // print out who won the game
-        }
-        else if (catsGame) {
-            // print out msg
-        }
-        else {
-            // make a move
-        }
+//        boolean winner = isThereAWinner(board);
+//        if (winner) {
+//            // print out who won the game
+//        }
+//        else if (catsGame) {
+//            // print out msg
+//        }
+//        else {
+//            // make a move
+//        }
     }
     public static void drawingBoard(Board board) {
         String[][] b = board.getBoard();
@@ -48,7 +48,7 @@ public class Game {
         }
     }
 
-    public static Object isThereAWinner(Board board) {
+    public static boolean isThereAWinner(Board board) {
         String[][] b = board.getBoard();
         boolean winner = false;
 
@@ -65,6 +65,25 @@ public class Game {
         }
 
         return winner;
+    }
+
+    public static boolean catsGame(Board board) {
+        String[][] b = board.getBoard();
+        boolean fullBoard = true;
+
+        for (int i = 0; i < b.length; i++) {
+            for (int j = 0; j < b[i].length; j++) {
+                if (b[i][j].equals(" ")) {
+                    fullBoard = false;
+                    break;
+                }
+            }
+            if (!fullBoard) {
+                break;
+            }
+        }
+
+        return fullBoard;
     }
 
     private static boolean checkLine(String a, String b, String c) {
