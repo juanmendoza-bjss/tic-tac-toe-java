@@ -20,7 +20,8 @@ public class Game {
 
         drawingBoard(board);
 
-//        boolean winner = isThereAWinner(board);
+        boolean winner = isThereAWinner(board);
+
 //        if (winner) {
 //            // print out who won the game
 //        }
@@ -84,6 +85,30 @@ public class Game {
         }
 
         return fullBoard;
+    }
+
+    public static void move(Board board, String cellSelected, Player player, Scanner keyboard) {
+        String[][] b = board.getBoard();
+        boolean isPlayerXTurn = player.isPlayerX();
+        String playerMark = "X";
+
+        int indexOfSpace = cellSelected.indexOf(" ");
+        int row = Integer.parseInt(cellSelected.substring(0, indexOfSpace)) - 1;
+        int column = Integer.parseInt(cellSelected.substring(2)) - 1;
+
+        if (!isPlayerXTurn) {
+            playerMark = "O";
+        }
+
+        while (!b[row][column].equals(" ")) {
+            System.out.println("Your selection is not valid. Choose another cell: ");
+            cellSelected = keyboard.nextLine();
+            row = Integer.parseInt(cellSelected.substring(0, indexOfSpace)) - 1;
+            column = Integer.parseInt(cellSelected.substring(2)) - 1;
+        }
+
+        b[row][column] = playerMark;
+        board.setBoard(b);
     }
 
     private static boolean checkLine(String a, String b, String c) {

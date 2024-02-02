@@ -6,6 +6,11 @@ public class Player {
         this.playerX = true;
     }
 
+    public Player(String name) {
+        this.name = name;
+        this.playerX = true;
+    }
+
     public String getName() {
         return this.name;
     }

@@ -2,6 +2,9 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+import java.util.Scanner;
+
 public class GameTest {
 
     @Test
@@ -37,7 +40,7 @@ public class GameTest {
     }
 
     @Test
-    @DisplayName("Cats Game")
+    @DisplayName("Cat's Game")
     public void itsACatsGame() {
         Board board = new Board();
         board.setBoard(new String[][]{{"X", "O", "X"}, {"X", "O", "O"}, {"O", "X", "X"}});
@@ -46,11 +49,52 @@ public class GameTest {
     }
 
     @Test
-    @DisplayName("Not a Cats Game")
+    @DisplayName("Not a Cat's Game")
     public void itsNotACatsGame() {
         Board board = new Board();
         board.setBoard(new String[][]{{"X", " ", "X"}, {"X", "O", "O"}, {"O", "X", "X"}});
         boolean fullBoard = Game.catsGame(board);
         Assertions.assertFalse(fullBoard);
     }
+
+    @Test
+    @DisplayName("Player X makes a valid move")
+    public void playerXValidMove() {
+        Board board = new Board();
+        Board expectedBoard = new Board();
+        expectedBoard.setBoard(new String[][]{{" ", " ", " "}, {" ", " ", "X"}, {" ", " ", " "}});
+
+        String move = "2 3";
+        Player player = new Player();
+
+        Scanner keyboard = new Scanner(System.in);
+
+        Game.move(board, move, player, keyboard);
+
+        keyboard.close();
+
+        Assertions.assertEquals(Arrays.deepToString(expectedBoard.getBoard()), Arrays.deepToString(board.getBoard()));
+    }
+
+    @Test
+    @DisplayName("Player O makes a valid move")
+    public void playerOValidMove() {
+        Board board = new Board();
+        Board expectedBoard = new Board();
+        expectedBoard.setBoard(new String[][]{{" ", " ", " "}, {" ", " ", "O"}, {" ", " ", " "}});
+
+        String move = "2 3";
+        Player player = new Player();
+        player.setPlayerX(false);
+
+        Scanner keyboard = new Scanner(System.in);
+
+        Game.move(board, move, player, keyboard);
+
+        keyboard.close();
+
+        Assertions.assertEquals(Arrays.deepToString(expectedBoard.getBoard()), Arrays.deepToString(board.getBoard()));
+    }
 }
+
+
