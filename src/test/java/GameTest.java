@@ -32,13 +32,47 @@ public class GameTest {
 
     @Test
     @DisplayName("Declare a winner with horizontal row")
-    public void daclareAWinner() {
+    public void horizontalWinner() {
         Board board = new Board();
+        WinningPlayer winningPlayer = new WinningPlayer();
+
         board.setBoard(new String[][]{{"X", "X", "X"}, {" ", "X", " "}, {" ", " ", " "}});
-        boolean winner = Game.isThereAWinner(board);
-        Assertions.assertTrue(winner);
+        Game.isThereAWinner(board, winningPlayer);
+        Assertions.assertTrue(winningPlayer.isWinner());
     }
 
+    @Test
+    @DisplayName("Declare a winner with diagonal row from top left")
+    public void leftDiagonalWinner() {
+        Board board = new Board();
+        WinningPlayer winningPlayer = new WinningPlayer();
+
+        board.setBoard(new String[][]{{"X", " ", "X"}, {" ", "X", " "}, {" ", " ", "X"}});
+        Game.isThereAWinner(board, winningPlayer);
+        Assertions.assertTrue(winningPlayer.isWinner());
+    }
+
+    @Test
+    @DisplayName("Declare a winner with diagonal row from top right")
+    public void rightDiagonalWinner() {
+        Board board = new Board();
+        WinningPlayer winningPlayer = new WinningPlayer();
+
+        board.setBoard(new String[][]{{"X", " ", "X"}, {" ", "X", " "}, {"X", " ", "X"}});
+        Game.isThereAWinner(board, winningPlayer);
+        Assertions.assertTrue(winningPlayer.isWinner());
+    }
+
+    @Test
+    @DisplayName("Declare a winner with vertical row")
+    public void verticalWinner() {
+        Board board = new Board();
+        WinningPlayer winningPlayer = new WinningPlayer();
+
+        board.setBoard(new String[][]{{"X", "X", "X"}, {" ", "X", " "}, {" ", "X", " "}});
+        Game.isThereAWinner(board, winningPlayer);
+        Assertions.assertTrue(winningPlayer.isWinner());
+    }
     @Test
     @DisplayName("Cat's Game")
     public void itsACatsGame() {
